@@ -1,4 +1,4 @@
-package dev.argraur.yandex.todo
+package dev.argraur.yandex.todo.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
