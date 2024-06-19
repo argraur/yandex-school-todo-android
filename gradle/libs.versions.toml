@@ -12,6 +12,9 @@ daggerVer = "2.51.1"
 kspVer = "2.0.0-1.0.21"
 appcompat = "1.7.0"
 material = "1.12.0"
+composeNav = "2.7.7"
+hiltComposeNav = "1.2.0"
+hiltVer = "2.51.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,14 +31,17 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "daggerVer"}
-dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerVer"}
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNav" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltComposeNav"}
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVer" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVer" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVer"}
 android-library = { id = "com.android.library", version.ref = "agp" }

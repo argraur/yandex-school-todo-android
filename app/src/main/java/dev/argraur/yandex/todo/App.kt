@@ -1,15 +1,7 @@
 package dev.argraur.yandex.todo
 
 import android.app.Application
-import dagger.Component
+import dagger.hilt.android.HiltAndroidApp
 
-@Component
-interface AppComponent
-
-class App : Application() {
-    val appComponent = DaggerAppComponent.create()
-
-    override fun onCreate() {
-        super.onCreate()
-    }
-}
+@HiltAndroidApp
+class App : Application()
