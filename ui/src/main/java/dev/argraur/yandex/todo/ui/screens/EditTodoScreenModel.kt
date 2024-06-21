@@ -7,6 +7,7 @@ import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.domain.usecases.AddTodoItemUseCase
 import dev.argraur.yandex.todo.domain.usecases.GetTodoItemByIdUseCase
+import dev.argraur.yandex.todo.domain.usecases.RemoveTodoItemUseCase
 import dev.argraur.yandex.todo.domain.usecases.UpdateTodoItemUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +23,8 @@ class EditTodoScreenModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getTodoItemByIdUseCase: GetTodoItemByIdUseCase,
     private val addTodoItemUseCase: AddTodoItemUseCase,
-    private val updateTodoItemUseCase: UpdateTodoItemUseCase
+    private val updateTodoItemUseCase: UpdateTodoItemUseCase,
+    private val removeTodoItemUseCase: RemoveTodoItemUseCase
 ): ViewModel() {
     private val id: String? = savedStateHandle["id"]
     private val _todo: MutableStateFlow<TodoItem>
@@ -68,5 +70,10 @@ class EditTodoScreenModel @Inject constructor(
                 else null
             )
         }
+    }
+
+    fun removeTodo() {
+        if (!isNew)
+            removeTodoItemUseCase(id!!)
     }
 }

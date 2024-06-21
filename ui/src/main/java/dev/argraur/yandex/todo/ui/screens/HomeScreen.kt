@@ -1,8 +1,6 @@
 package dev.argraur.yandex.todo.ui.screens
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -71,9 +68,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenModel) {
                     actions = {
                         IconButton(onClick = { viewModel.toggleVisibility() }) {
                             if ((uiState as HomeScreenUiState.Loaded).doneVisible) {
-                                Icon(painterResource(R.drawable.ic_visibility), "Done are visible")
+                                Icon(painterResource(R.drawable.ic_visibility),
+                                    stringResource(R.string.content_description_ic_visibility))
                             } else {
-                                Icon(painterResource(R.drawable.ic_visibility_off), "Done are invisible")
+                                Icon(painterResource(R.drawable.ic_visibility_off),
+                                    stringResource(R.string.content_description_ic_visibility_off))
                             }
                         }
                     },
@@ -107,7 +106,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenModel) {
                     modifier = Modifier.align(Alignment.BottomEnd)
                         .padding(bottom = 24.dp, end = 24.dp)
                 ) {
-                    Icon(Icons.Default.Add, "Add todo")
+                    Icon(Icons.Default.Add, stringResource(R.string.content_description_add_todo))
                 }
             }
         }

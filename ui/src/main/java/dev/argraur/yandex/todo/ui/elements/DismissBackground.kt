@@ -18,7 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.argraur.yandex.todo.ui.R
 import dev.argraur.yandex.todo.ui.theme.Green
 import dev.argraur.yandex.todo.ui.theme.Red
 
@@ -41,14 +43,14 @@ fun DismissBackground(dismissBoxState: SwipeToDismissBoxState) {
         AnimatedVisibility(dismissBoxState.dismissDirection == SwipeToDismissBoxValue.StartToEnd) {
             Icon(
                 Icons.Default.Delete,
-                contentDescription = "Delete"
+                contentDescription = stringResource(R.string.content_description_delete)
             )
         }
         Spacer(modifier = Modifier)
         AnimatedVisibility(dismissBoxState.dismissDirection == SwipeToDismissBoxValue.EndToStart) {
             Icon(
                 Icons.Default.Done,
-                contentDescription = "Done"
+                contentDescription = stringResource(R.string.content_description_done)
             )
         }
     }

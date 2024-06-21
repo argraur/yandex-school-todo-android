@@ -6,7 +6,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.ui.navigation.TodoRoute
 import dev.argraur.yandex.todo.ui.screens.EditTodoScreen
 import dev.argraur.yandex.todo.ui.screens.HomeScreen

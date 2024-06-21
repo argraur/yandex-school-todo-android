@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_title">Мои дела</string>
-    <string name="home_subtitle">"Выполнено - "</string>
+    <string name="home_title">My Tasks</string>
+    <string name="home_subtitle">"Done - "</string>
+
+    <string name="date_picker_confirm">OK</string>
+    <string name="date_picker_dismiss">Cancel</string>
+    <string name="date_pattern">dd MMMM yyyy</string>
+
+    <string name="edit_todo_delete">Delete</string>
+    <string name="edit_todo_deadline">Deadline</string>
+    <string name="edit_todo_urgency_urgent">!! Urgent</string>
+    <string name="edit_todo_urgency_normal">Normal</string>
+    <string name="edit_todo_urgency_low">Low</string>
+    <string name="edit_todo_urgency">Urgency</string>
+    <string name="edit_todo_text_placeholder">What should we do?</string>
+    <string name="edit_todo_save">Save</string>
+
+    <string name="todo_card_list_empty">Nothing here yet…</string>
+    <string name="todo_card_urgency_low_format">⬇️ %1$s</string>
+    <string name="todo_card_urgency_urgent_format">‼️ %1$s</string>
+
+    <string name="content_description_info">More</string>
+    <string name="content_description_close_editor">Back</string>
+    <string name="content_description_done">Done</string>
+    <string name="content_description_delete">Delete</string>
+    <string name="content_description_deadline">Deadline</string>
+    <string name="content_description_ic_visibility">Done todos are visible</string>
+    <string name="content_description_ic_visibility_off">Done todos are invisible</string>
+    <string name="content_description_add_todo">Add todo</string>
 </resources>

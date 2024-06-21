@@ -1,6 +1,5 @@
 package dev.argraur.yandex.todo.ui.elements
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,9 +18,10 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.argraur.yandex.todo.domain.model.TodoItem
+import dev.argraur.yandex.todo.ui.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -54,7 +53,7 @@ fun TodoCardList(todoItemList: List<TodoItem>, modifier: Modifier = Modifier, on
 
     AnimatedVisibility(todoItemList.isEmpty(), enter = enterTransition, exit = exitTransition) {
         Box(modifier = modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
-            Text("Тут ничего нет :(")
+            Text(stringResource(R.string.todo_card_list_empty))
         }
     }
 }

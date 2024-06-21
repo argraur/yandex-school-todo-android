@@ -1,6 +1,5 @@
 package dev.argraur.yandex.todo.ui.screens
 
-import android.opengl.Visibility
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.argraur.yandex.todo.domain.model.TodoItem
@@ -12,8 +11,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.lang.Thread.State
-
 import javax.inject.Inject
 
 sealed class HomeScreenUiState {
@@ -25,7 +22,7 @@ sealed class HomeScreenUiState {
 
 @HiltViewModel
 class HomeScreenModel @Inject constructor(
-    private val getTodoItemsUseCase: GetTodoItemsUseCase,
+    getTodoItemsUseCase: GetTodoItemsUseCase,
     private val addTodoItemUseCase: AddTodoItemUseCase,
     private val updateTodoItemUseCase: UpdateTodoItemUseCase,
     private val removeTodoItemUseCase: RemoveTodoItemUseCase
@@ -35,10 +32,6 @@ class HomeScreenModel @Inject constructor(
         get() = _uiState.asStateFlow()
 
     val todoItems: StateFlow<List<TodoItem>> = getTodoItemsUseCase()
-
-    fun addTodoItem(item: TodoItem) {
-        addTodoItemUseCase(item)
-    }
 
     fun updateTodoItem(item: TodoItem) {
         updateTodoItemUseCase(item)

@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
+import dev.argraur.yandex.todo.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,14 +35,14 @@ fun DeadlineDatePicker(opened: Boolean, onDismissRequest: () -> Unit, onConfirm:
                     },
                     enabled = confirmEnabled
                 ) {
-                    Text("OK")
+                    Text(stringResource(R.string.date_picker_confirm))
                 }
             },
             dismissButton = {
                 TextButton(onClick = {
                     onDismissRequest()
                 }) {
-                    Text("Отмена")
+                    Text(stringResource(R.string.date_picker_dismiss))
                 }
             }
         ) {

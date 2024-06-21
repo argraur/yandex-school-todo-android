@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Мои дела</string>
+    <string name="home_subtitle">"Выполнено - "</string>
+
+    <string name="date_picker_confirm">OK</string>
+    <string name="date_picker_dismiss">Отмена</string>
+    <string name="date_pattern">dd MMMM yyyy</string>
+
+    <string name="edit_todo_delete">Удалить</string>
+    <string name="edit_todo_deadline">Сделать до</string>
+    <string name="edit_todo_urgency_urgent">!! Высокий</string>
+    <string name="edit_todo_urgency_normal">Нет</string>
+    <string name="edit_todo_urgency_low">Низкий</string>
+    <string name="edit_todo_urgency">Важность</string>
+    <string name="edit_todo_text_placeholder">Что надо сделать…</string>
+    <string name="edit_todo_save">Сохранить</string>
+
+    <string name="todo_card_list_empty">Тут ничего нет…</string>
+    <string name="todo_card_urgency_low_format">⬇️ %1$s</string>
+    <string name="todo_card_urgency_urgent_format">‼️ %1$s</string>
+
+    <string name="content_description_delete">Удалить задачу</string>
+    <string name="content_description_deadline">Дедлайн</string>
+    <string name="content_description_close_editor">Back</string>
+    <string name="content_description_done">Объявить выполненным</string>
+    <string name="content_description_info">Узнать больше о задаче</string>
+    <string name="content_description_ic_visibility">Выполненные задачи видимы</string>
+    <string name="content_description_ic_visibility_off">Выполненные задачи не видимы</string>
+    <string name="content_description_add_todo">Add todo</string>
+</resources>
