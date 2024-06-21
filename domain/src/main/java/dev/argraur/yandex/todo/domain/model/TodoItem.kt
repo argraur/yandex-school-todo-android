@@ -7,7 +7,7 @@ data class TodoItem(
     val text: String,
     val urgency: Urgency,
     val done: Boolean,
-    val creationDate: LocalDate? = null,
+    val creationDate: LocalDate,
     val updateDate: LocalDate? = null,
     val deadline: LocalDate? = null
 )

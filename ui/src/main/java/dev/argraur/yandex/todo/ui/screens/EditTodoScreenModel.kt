@@ -38,7 +38,15 @@ class EditTodoScreenModel @Inject constructor(
         _todo = if (id != null)
             MutableStateFlow(getTodoItemByIdUseCase(id))
         else
-            MutableStateFlow(TodoItem(UUID.randomUUID().toString(), "", Urgency.Normal, false))
+            MutableStateFlow(
+                TodoItem(
+                    UUID.randomUUID().toString(),
+                    "",
+                    Urgency.Normal,
+                    false,
+                    creationDate = LocalDate.fromEpochDays(0)
+                )
+            )
     }
 
     fun saveTodo() {
