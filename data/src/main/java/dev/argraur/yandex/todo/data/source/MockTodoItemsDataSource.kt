@@ -5,7 +5,7 @@ import dev.argraur.yandex.todo.domain.model.Urgency
 import java.util.UUID
 
 class MockTodoItemsDataSource {
-    private val mockTodoItems = mutableListOf(
+    private var mockTodoItems = listOf(
         TodoItem(
             UUID.randomUUID().toString(),
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -72,15 +72,17 @@ class MockTodoItemsDataSource {
         mockTodoItems
 
     fun addTodoItem(item: TodoItem): Boolean {
-        return mockTodoItems.add(item)
+        mockTodoItems = mockTodoItems + item
+        return true
     }
 
     fun updateTodoItem(item: TodoItem): Boolean {
-        mockTodoItems.removeIf { it.id == item.id }
-        return mockTodoItems.add(item)
+        mockTodoItems = mockTodoItems - mockTodoItems.first { it.id == item.id } + item
+        return true
     }
 
     fun removeTodoItem(id: String): Boolean {
-        return mockTodoItems.removeIf { it.id == id }
+        mockTodoItems = mockTodoItems - mockTodoItems.first { it.id == id }
+        return true
     }
 }

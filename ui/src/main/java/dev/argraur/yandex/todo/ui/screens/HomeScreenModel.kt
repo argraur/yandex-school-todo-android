@@ -3,7 +3,6 @@ package dev.argraur.yandex.todo.ui.screens
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.argraur.yandex.todo.domain.model.TodoItem
-import dev.argraur.yandex.todo.domain.usecases.AddTodoItemUseCase
 import dev.argraur.yandex.todo.domain.usecases.GetTodoItemsUseCase
 import dev.argraur.yandex.todo.domain.usecases.RemoveTodoItemUseCase
 import dev.argraur.yandex.todo.domain.usecases.UpdateTodoItemUseCase
@@ -23,7 +22,6 @@ sealed class HomeScreenUiState {
 @HiltViewModel
 class HomeScreenModel @Inject constructor(
     getTodoItemsUseCase: GetTodoItemsUseCase,
-    private val addTodoItemUseCase: AddTodoItemUseCase,
     private val updateTodoItemUseCase: UpdateTodoItemUseCase,
     private val removeTodoItemUseCase: RemoveTodoItemUseCase
 ) : ViewModel() {
