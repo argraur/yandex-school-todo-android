@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "dev.argraur.yandex.todo.domain"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0-alpha05"
+agp = "8.6.0-alpha07"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -17,7 +17,7 @@ hiltComposeNav = "1.2.0"
 hiltVer = "2.51.1"
 datetime = "0.6.0"
 coroutines = "1.8.0"
-lifecycleViewModelCompose = "2.6.1"
+lifecycleViewModelCompose = "2.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
