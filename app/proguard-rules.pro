@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class dev.argraur.yandex.todo.** { *; }
+
+-keep class dagger.internal.** { *; }
+-keep class dagger.hilt.** { *; }
+-keep class hilt_aggregated_deps.** { *; }
