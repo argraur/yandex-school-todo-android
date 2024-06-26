@@ -39,14 +39,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import dev.argraur.yandex.todo.core.extensions.localizedFormat
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
 import dev.argraur.yandex.todo.ui.elements.DeadlineDatePicker
 import dev.argraur.yandex.todo.ui.elements.UrgencyDropdownMenu
 import dev.argraur.yandex.todo.ui.theme.Red
-import kotlinx.datetime.toJavaLocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -112,7 +110,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Column(modifier = Modifier.clickable {
                     urgencyDropdownMenuOpened = true
-                }) {
+                }.fillMaxWidth()) {
                     UrgencyDropdownMenu(
                         urgencyDropdownMenuOpened,
                         onDismissRequest = { urgencyDropdownMenuOpened = false },
@@ -131,21 +129,16 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 }
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
-                    Column {
+                    Column(modifier = Modifier.clickable {
+                        if (!deadlineEnabled)
+                            datePickerOpened = true
+                    }) {
                         Text(stringResource(R.string.edit_todo_deadline))
                         if (todo.deadline != null) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.alpha(0.5f)) {
                                 Icon(Icons.Default.DateRange,
                                     stringResource(R.string.content_description_deadline))
-                                Text(
-                                    text = todo.deadline!!.toJavaLocalDate()
-                                        .format(
-                                            DateTimeFormatter.ofPattern(
-                                                stringResource(R.string.date_pattern),
-                                                Locale.getDefault()
-                                            )
-                                        )
-                                )
+                                Text(text = todo.deadline!!.localizedFormat())
                             }
                         }
                     }

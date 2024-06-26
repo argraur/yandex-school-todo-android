@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dev.argraur.yandex.todo.core.extensions.localizedFormat
 import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
@@ -72,13 +73,7 @@ fun TodoCard(todoItem: TodoItem, onUpdateTodoItem: (TodoItem) -> Unit, onTodoIte
                         )
                         Text(
                             color = if (deadlineMiss) Red else Color.Unspecified,
-                            text = todoItem.deadline!!.toJavaLocalDate()
-                                .format(
-                                    DateTimeFormatter.ofPattern(
-                                        stringResource(R.string.date_pattern),
-                                        Locale.getDefault()
-                                    )
-                                )
+                            text = todoItem.deadline!!.localizedFormat()
                         )
                     }
                 }

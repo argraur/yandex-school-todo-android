@@ -66,7 +66,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenModel) {
                         }
                     },
                     actions = {
-                        IconButton(onClick = { viewModel.toggleVisibility() }) {
+                        IconButton(onClick = {
+                            viewModel.toggleVisibility()
+                        }) {
                             if ((uiState as HomeScreenUiState.Loaded).doneVisible) {
                                 Icon(painterResource(R.drawable.ic_visibility),
                                     stringResource(R.string.content_description_ic_visibility))
