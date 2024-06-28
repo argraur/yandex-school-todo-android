@@ -6,5 +6,5 @@ import javax.inject.Inject
 class RemoveTodoItemUseCase @Inject constructor(
     private val repository: TodoItemsRepository
 ) {
-    operator fun invoke(id: String) = repository.removeTodoItem(id)
+    suspend operator fun invoke(id: String) = repository.removeTodoItem(id)
 }

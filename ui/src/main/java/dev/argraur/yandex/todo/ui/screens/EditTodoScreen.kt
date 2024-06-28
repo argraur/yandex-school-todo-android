@@ -38,19 +38,16 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import dev.argraur.yandex.todo.core.extensions.localizedFormat
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
 import dev.argraur.yandex.todo.ui.elements.DeadlineDatePicker
 import dev.argraur.yandex.todo.ui.elements.UrgencyDropdownMenu
-import dev.argraur.yandex.todo.ui.theme.Red
-import kotlinx.datetime.toJavaLocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+import dev.argraur.yandex.todo.ui.theme.LocalCustomColorsPalette
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel) {
+fun EditTodoScreen(viewModel: EditTodoScreenModel, onNavigateBack: () -> Unit) {
     val todo by viewModel.todo.collectAsState()
     val deadlineEnabled = todo.deadline != null
 
@@ -74,7 +71,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 title = {},
                 navigationIcon = {
                     IconButton({
-                        navController.popBackStack()
+                        onNavigateBack()
                     }) {
                         Icon(Icons.Default.Close,
                             stringResource(R.string.content_description_close_editor))
@@ -83,7 +80,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 actions = {
                     TextButton(onClick = {
                         viewModel.saveTodo()
-                        navController.popBackStack()
+                        onNavigateBack()
                     }) {
                         Text(stringResource(R.string.edit_todo_save))
                     }
@@ -112,7 +109,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Column(modifier = Modifier.clickable {
                     urgencyDropdownMenuOpened = true
-                }) {
+                }.fillMaxWidth()) {
                     UrgencyDropdownMenu(
                         urgencyDropdownMenuOpened,
                         onDismissRequest = { urgencyDropdownMenuOpened = false },
@@ -126,26 +123,21 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                             Urgency.Normal -> stringResource(R.string.edit_todo_urgency_normal)
                             Urgency.Urgent -> stringResource(R.string.edit_todo_urgency_urgent)
                         },
-                        color = if (todo.urgency == Urgency.Urgent) Red else Color.Unspecified
+                        color = if (todo.urgency == Urgency.Urgent) LocalCustomColorsPalette.current.redAccent else Color.Unspecified
                     )
                 }
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
-                    Column {
+                    Column(modifier = Modifier.clickable {
+                        if (deadlineEnabled)
+                            datePickerOpened = true
+                    }) {
                         Text(stringResource(R.string.edit_todo_deadline))
                         if (todo.deadline != null) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.alpha(0.5f)) {
                                 Icon(Icons.Default.DateRange,
                                     stringResource(R.string.content_description_deadline))
-                                Text(
-                                    text = todo.deadline!!.toJavaLocalDate()
-                                        .format(
-                                            DateTimeFormatter.ofPattern(
-                                                stringResource(R.string.date_pattern),
-                                                Locale.getDefault()
-                                            )
-                                        )
-                                )
+                                Text(text = todo.deadline!!.localizedFormat())
                             }
                         }
                     }
@@ -163,9 +155,9 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 }
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Button(
-                    onClick = { viewModel.removeTodo(); navController.popBackStack() },
+                    onClick = { viewModel.removeTodo(); onNavigateBack() },
                     enabled = !viewModel.isNew,
-                    colors = ButtonDefaults.buttonColors().copy(contentColor = Red, containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
+                    colors = ButtonDefaults.buttonColors().copy(contentColor = LocalCustomColorsPalette.current.redAccent, containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
                     shape = ButtonDefaults.textShape
                 ) {
                     Icon(Icons.Default.Delete, stringResource(R.string.content_description_delete))

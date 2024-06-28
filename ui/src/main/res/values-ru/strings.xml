@@ -5,7 +5,6 @@
 
     <string name="date_picker_confirm">OK</string>
     <string name="date_picker_dismiss">Отмена</string>
-    <string name="date_pattern">dd MMMM yyyy</string>
 
     <string name="edit_todo_delete">Удалить</string>
     <string name="edit_todo_deadline">Сделать до</string>
@@ -28,4 +27,9 @@
     <string name="content_description_ic_visibility">Выполненные задачи видимы</string>
     <string name="content_description_ic_visibility_off">Выполненные задачи не видимы</string>
     <string name="content_description_add_todo">Add todo</string>
+
+    <string name="main_error_toast">"Произошла ошибка: "</string>
+    <string name="main_loading_error">Произошла ошибка во время загрузки данных</string>
+    <string name="main_loading_retry">Повторить попытку</string>
+    <string name="content_description_main_retry">Кнопка повторить попытку</string>
 </resources>

@@ -26,7 +26,7 @@ fun SwipeableTodoCard(
     var shouldRemove by remember { mutableStateOf(false) }
     LaunchedEffect(shouldRemove) {
         if (shouldRemove) {
-            delay(300)
+            delay(200)
             onRemoveTodoItem(todoItem)
             shouldRemove = false
         }

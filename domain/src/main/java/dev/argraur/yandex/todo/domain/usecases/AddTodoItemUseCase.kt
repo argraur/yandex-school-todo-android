@@ -9,5 +9,5 @@ import javax.inject.Inject
 class AddTodoItemUseCase @Inject constructor(
     private val repository: TodoItemsRepository
 ) {
-    operator fun invoke(item: TodoItem) = repository.addTodoItem(item.copy(creationDate = LocalDate.now().toKotlinLocalDate()))
+    suspend operator fun invoke(item: TodoItem) = repository.addTodoItem(item.copy(creationDate = LocalDate.now().toKotlinLocalDate()))
 }

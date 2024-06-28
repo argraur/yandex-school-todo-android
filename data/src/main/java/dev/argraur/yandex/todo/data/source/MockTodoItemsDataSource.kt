@@ -7,7 +7,7 @@ import kotlinx.datetime.format.DateTimeFormat
 import java.util.UUID
 
 class MockTodoItemsDataSource {
-    private var mockTodoItems = listOf(
+    private var mockTodoItems = mutableListOf(
         TodoItem(
             UUID.randomUUID().toString(),
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -87,17 +87,22 @@ class MockTodoItemsDataSource {
         mockTodoItems
 
     fun addTodoItem(item: TodoItem): Boolean {
-        mockTodoItems = mockTodoItems + item
+        mockTodoItems.add(item)
         return true
     }
 
     fun updateTodoItem(item: TodoItem): Boolean {
-        mockTodoItems = mockTodoItems - mockTodoItems.first { it.id == item.id } + item
-        return true
+        mockTodoItems.removeIf { it.id == item.id }
+        return mockTodoItems.add(item)
     }
 
     fun removeTodoItem(id: String): Boolean {
-        mockTodoItems = mockTodoItems - mockTodoItems.first { it.id == id }
-        return true
+        /* ПОТОМ ИСПРАВЛЮ, МОЖЕТ БЫТЬ */
+        try {
+            mockTodoItems = (mockTodoItems - mockTodoItems.first { it.id == id }).toMutableList()
+            return true
+        } catch (e: Exception) {
+            return false
+        }
     }
 }

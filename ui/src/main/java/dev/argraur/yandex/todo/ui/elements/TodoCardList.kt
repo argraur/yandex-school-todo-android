@@ -37,8 +37,7 @@ fun TodoCardList(todoItemList: List<TodoItem>, modifier: Modifier = Modifier, on
             ),
             contentPadding = PaddingValues(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
-        )
-        {
+        ) {
             items(todoItemList, key = { it.id }) {
                 SwipeableTodoCard(
                     it,

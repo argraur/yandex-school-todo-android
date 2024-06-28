@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
-import dev.argraur.yandex.todo.ui.theme.Red
+import dev.argraur.yandex.todo.ui.theme.LocalCustomColorsPalette
 
 @Composable
 fun UrgencyDropdownMenu(expanded: Boolean, onDismissRequest: () -> Unit, onChoice: (Urgency) -> Unit) {
@@ -21,7 +21,7 @@ fun UrgencyDropdownMenu(expanded: Boolean, onDismissRequest: () -> Unit, onChoic
             onClick = { onChoice(Urgency.Low) }
         )
         DropdownMenuItem(
-            text = { Text(stringResource(R.string.edit_todo_urgency_urgent), color = Red) },
+            text = { Text(stringResource(R.string.edit_todo_urgency_urgent), color = LocalCustomColorsPalette.current.redAccent) },
             onClick = { onChoice(Urgency.Urgent) }
         )
     }
