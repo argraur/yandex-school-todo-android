@@ -45,17 +45,12 @@ class EditTodoScreenModel @Inject constructor(
                 )
             )
     }
+
     val todo: StateFlow<TodoItem>
         get() = _todo.asStateFlow()
 
     val isNew: Boolean
         get() = id == null
-
-    init {
-        viewModelScope.launch(Dispatchers.Main.immediate) {
-
-        }
-    }
 
     fun saveTodo() = viewModelScope.launch {
         if (id != null) {
