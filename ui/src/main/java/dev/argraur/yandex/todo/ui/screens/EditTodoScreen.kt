@@ -38,7 +38,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import dev.argraur.yandex.todo.core.extensions.localizedFormat
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
