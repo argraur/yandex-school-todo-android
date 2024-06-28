@@ -48,7 +48,7 @@ import dev.argraur.yandex.todo.ui.theme.Red
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel) {
+fun EditTodoScreen(viewModel: EditTodoScreenModel, onNavigateBack: () -> Unit) {
     val todo by viewModel.todo.collectAsState()
     val deadlineEnabled = todo.deadline != null
 
@@ -72,7 +72,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 title = {},
                 navigationIcon = {
                     IconButton({
-                        navController.popBackStack()
+                        onNavigateBack()
                     }) {
                         Icon(Icons.Default.Close,
                             stringResource(R.string.content_description_close_editor))
@@ -81,7 +81,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 actions = {
                     TextButton(onClick = {
                         viewModel.saveTodo()
-                        navController.popBackStack()
+                        onNavigateBack()
                     }) {
                         Text(stringResource(R.string.edit_todo_save))
                     }
@@ -130,7 +130,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
                     Column(modifier = Modifier.clickable {
-                        if (!deadlineEnabled)
+                        if (deadlineEnabled)
                             datePickerOpened = true
                     }) {
                         Text(stringResource(R.string.edit_todo_deadline))
@@ -156,7 +156,7 @@ fun EditTodoScreen(navController: NavController, viewModel: EditTodoScreenModel)
                 }
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Button(
-                    onClick = { viewModel.removeTodo(); navController.popBackStack() },
+                    onClick = { viewModel.removeTodo(); onNavigateBack() },
                     enabled = !viewModel.isNew,
                     colors = ButtonDefaults.buttonColors().copy(contentColor = Red, containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
                     shape = ButtonDefaults.textShape

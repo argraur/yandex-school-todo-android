@@ -50,7 +50,7 @@ fun TodoCard(todoItem: TodoItem, onUpdateTodoItem: (TodoItem) -> Unit, onTodoIte
         Urgency.Urgent -> { text = stringResource(R.string.todo_card_urgency_urgent_format, text); uncheckedColor = Color.Red }
         else -> {}
     }
-    var deadlineMiss = todoItem.deadline != null && java.time.LocalDate.now().toKotlinLocalDate() > todoItem.deadline!!
+    val deadlineMiss = todoItem.deadline != null && java.time.LocalDate.now().toKotlinLocalDate() > todoItem.deadline!!
 
     Card(modifier = modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)), onClick = { onTodoItemClick(todoItem) }, shape = RectangleShape) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {

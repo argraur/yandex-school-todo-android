@@ -17,8 +17,24 @@ fun TodoNavHost(navController: NavHostController, modifier: Modifier) {
         startDestination = TodoRoute.Home.route,
         modifier = modifier
     ) {
-        composable(TodoRoute.Home.route) { HomeScreen(navController, hiltViewModel()) }
-        composable(TodoRoute.Edit.route) { EditTodoScreen(navController, hiltViewModel()) }
-        composable(TodoRoute.New.route) { EditTodoScreen(navController, hiltViewModel()) }
+        composable(TodoRoute.Home.route) {
+            HomeScreen(
+                viewModel = hiltViewModel(),
+                onNavigateToNew = { navController.navigate(TodoRoute.New.route) },
+                onNavigateToEdit = { navController.navigate("edit/${it}") }
+            )
+        }
+        composable(TodoRoute.Edit.route) {
+            EditTodoScreen(
+                viewModel = hiltViewModel(),
+                onNavigateBack = { navController.popBackStack(TodoRoute.Home.route, false) }
+            )
+        }
+        composable(TodoRoute.New.route) {
+            EditTodoScreen(
+                viewModel = hiltViewModel(),
+                onNavigateBack = { navController.popBackStack(TodoRoute.Home.route, false) }
+            )
+        }
     }
 }
