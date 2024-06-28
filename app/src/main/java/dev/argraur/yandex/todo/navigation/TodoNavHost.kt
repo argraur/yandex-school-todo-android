@@ -6,9 +6,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.argraur.yandex.todo.ui.navigation.TodoRoute
 import dev.argraur.yandex.todo.ui.screens.EditTodoScreen
 import dev.argraur.yandex.todo.ui.screens.HomeScreen
+
+sealed class TodoRoute(val route: String) {
+    data object Home : TodoRoute("home")
+    data object Edit : TodoRoute("edit/{id}")
+    data object New  : TodoRoute("new")
+}
 
 @Composable
 fun TodoNavHost(navController: NavHostController, modifier: Modifier) {
