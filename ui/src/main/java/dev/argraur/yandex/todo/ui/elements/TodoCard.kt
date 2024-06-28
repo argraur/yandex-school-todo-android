@@ -32,12 +32,8 @@ import dev.argraur.yandex.todo.core.extensions.localizedFormat
 import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
-import dev.argraur.yandex.todo.ui.theme.Green
-import dev.argraur.yandex.todo.ui.theme.Red
-import kotlinx.datetime.toJavaLocalDate
+import dev.argraur.yandex.todo.ui.theme.LocalCustomColorsPalette
 import kotlinx.datetime.toKotlinLocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun TodoCard(todoItem: TodoItem, onUpdateTodoItem: (TodoItem) -> Unit, onTodoItemClick: (TodoItem) -> Unit, modifier: Modifier) {
@@ -54,7 +50,7 @@ fun TodoCard(todoItem: TodoItem, onUpdateTodoItem: (TodoItem) -> Unit, onTodoIte
 
     Card(modifier = modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)), onClick = { onTodoItemClick(todoItem) }, shape = RectangleShape) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {
-            Checkbox(todoItem.done, onCheckedChange = { onUpdateTodoItem(todoItem.copy(done = it)) }, modifier = Modifier.weight(0.1f), colors = CheckboxDefaults.colors(checkedColor = Green, uncheckedColor = uncheckedColor))
+            Checkbox(todoItem.done, onCheckedChange = { onUpdateTodoItem(todoItem.copy(done = it)) }, modifier = Modifier.weight(0.1f), colors = CheckboxDefaults.colors(checkedColor = LocalCustomColorsPalette.current.greenAccent, uncheckedColor = uncheckedColor))
             Column(modifier = Modifier.weight(0.8f)) {
                 Text(
                     text = text,
@@ -69,10 +65,10 @@ fun TodoCard(todoItem: TodoItem, onUpdateTodoItem: (TodoItem) -> Unit, onTodoIte
                             Icons.Default.DateRange,
                             stringResource(R.string.content_description_deadline),
                             modifier = Modifier.size(16.dp),
-                            tint = if (deadlineMiss) Red else LocalContentColor.current
+                            tint = if (deadlineMiss) LocalCustomColorsPalette.current.redAccent else LocalContentColor.current
                         )
                         Text(
-                            color = if (deadlineMiss) Red else Color.Unspecified,
+                            color = if (deadlineMiss) LocalCustomColorsPalette.current.redAccent else Color.Unspecified,
                             text = todoItem.deadline!!.localizedFormat()
                         )
                     }

@@ -43,7 +43,7 @@ import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.ui.R
 import dev.argraur.yandex.todo.ui.elements.DeadlineDatePicker
 import dev.argraur.yandex.todo.ui.elements.UrgencyDropdownMenu
-import dev.argraur.yandex.todo.ui.theme.Red
+import dev.argraur.yandex.todo.ui.theme.LocalCustomColorsPalette
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -123,7 +123,7 @@ fun EditTodoScreen(viewModel: EditTodoScreenModel, onNavigateBack: () -> Unit) {
                             Urgency.Normal -> stringResource(R.string.edit_todo_urgency_normal)
                             Urgency.Urgent -> stringResource(R.string.edit_todo_urgency_urgent)
                         },
-                        color = if (todo.urgency == Urgency.Urgent) Red else Color.Unspecified
+                        color = if (todo.urgency == Urgency.Urgent) LocalCustomColorsPalette.current.redAccent else Color.Unspecified
                     )
                 }
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
@@ -157,7 +157,7 @@ fun EditTodoScreen(viewModel: EditTodoScreenModel, onNavigateBack: () -> Unit) {
                 Button(
                     onClick = { viewModel.removeTodo(); onNavigateBack() },
                     enabled = !viewModel.isNew,
-                    colors = ButtonDefaults.buttonColors().copy(contentColor = Red, containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
+                    colors = ButtonDefaults.buttonColors().copy(contentColor = LocalCustomColorsPalette.current.redAccent, containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
                     shape = ButtonDefaults.textShape
                 ) {
                     Icon(Icons.Default.Delete, stringResource(R.string.content_description_delete))
