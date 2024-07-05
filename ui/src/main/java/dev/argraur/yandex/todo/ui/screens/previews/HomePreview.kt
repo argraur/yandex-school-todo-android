@@ -57,19 +57,8 @@ val repository: TodoItemsRepository = object : TodoItemsRepository {
             )
         )
 
-    override suspend fun addTodoItem(item: TodoItem): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getTodoById(id: String): TodoItem {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun removeTodoItem(id: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun updateTodoItem(item: TodoItem): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addTodoItem(item: TodoItem): Boolean = throw NotImplementedError()
+    override fun getTodoById(id: String): TodoItem = throw NotImplementedError()
+    override suspend fun removeTodoItem(id: String): Boolean = throw NotImplementedError()
+    override suspend fun updateTodoItem(item: TodoItem): Boolean = throw NotImplementedError()
 }
