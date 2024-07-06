@@ -31,4 +31,9 @@
     <string name="main_loading_error">Error occurred during data loading</string>
     <string name="main_loading_retry">Try again</string>
     <string name="content_description_main_retry">Try again button</string>
+    <string name="error_server_sync">Failed to sync data with server</string>
+    <string name="error_task_update">Failed to update task on server</string>
+    <string name="error_task_remove">Failed to remove task on server</string>
+    <string name="error_no_error" translatable="false" />
+    <string name="error_snackbar_action_label">Retry</string>
 </resources>

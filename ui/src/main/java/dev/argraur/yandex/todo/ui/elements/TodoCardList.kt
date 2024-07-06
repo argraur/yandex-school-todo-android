@@ -44,7 +44,7 @@ fun TodoCardList(todoItemList: List<TodoItem>, modifier: Modifier = Modifier, on
                     onRemoveTodoItem = onRemoveTodoItem,
                     onUpdateTodoItem = onUpdateTodoItem,
                     onTodoItemClick = onTodoItemClick,
-                    modifier = Modifier.animateItemPlacement()
+                    modifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null)
                 )
             }
         }

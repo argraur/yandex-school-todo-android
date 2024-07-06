@@ -6,6 +6,7 @@ import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.domain.model.Urgency
 import dev.argraur.yandex.todo.domain.repository.TodoItemsRepository
 import dev.argraur.yandex.todo.domain.usecases.GetTodoItemsUseCase
+import dev.argraur.yandex.todo.domain.usecases.RefreshRepositoryUseCase
 import dev.argraur.yandex.todo.domain.usecases.RemoveTodoItemUseCase
 import dev.argraur.yandex.todo.domain.usecases.UpdateTodoItemUseCase
 import dev.argraur.yandex.todo.ui.screens.HomeScreen
@@ -22,6 +23,7 @@ fun HomePreview() {
         getTodoItemsUseCase = GetTodoItemsUseCase(repository),
         updateTodoItemUseCase = UpdateTodoItemUseCase(repository),
         removeTodoItemUseCase = RemoveTodoItemUseCase(repository),
+        refreshRepositoryUseCase = RefreshRepositoryUseCase(repository)
     )
 
     viewModel.toggleVisibility()
@@ -57,8 +59,9 @@ val repository: TodoItemsRepository = object : TodoItemsRepository {
             )
         )
 
-    override suspend fun addTodoItem(item: TodoItem): Boolean = throw NotImplementedError()
-    override fun getTodoById(id: String): TodoItem = throw NotImplementedError()
-    override suspend fun removeTodoItem(id: String): Boolean = throw NotImplementedError()
-    override suspend fun updateTodoItem(item: TodoItem): Boolean = throw NotImplementedError()
+    override suspend fun addTodoItem(item: TodoItem) = throw NotImplementedError()
+    override suspend fun getTodoById(id: String): TodoItem = throw NotImplementedError()
+    override suspend fun removeTodoItem(id: String) = throw NotImplementedError()
+    override suspend fun updateTodoItem(item: TodoItem) = throw NotImplementedError()
+    override suspend fun refreshRepository() {}
 }

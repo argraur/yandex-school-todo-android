@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 
 import java.util.UUID
@@ -31,32 +32,36 @@ class EditTodoScreenModel @Inject constructor(
     private val removeTodoItemUseCase: RemoveTodoItemUseCase
 ): ViewModel() {
     private val id: String? = savedStateHandle["id"]
-    private val _todo: MutableStateFlow<TodoItem> by lazy {
-        if (id != null)
-            MutableStateFlow(getTodoItemByIdUseCase(id))
-        else
-            MutableStateFlow(
-                TodoItem(
-                    UUID.randomUUID().toString(),
-                    "",
-                    Urgency.Normal,
-                    false,
-                    creationDate = LocalDate.fromEpochDays(0)
-                )
-            )
-    }
+    private val _todo: MutableStateFlow<TodoItem> = MutableStateFlow(
+        TodoItem(
+            UUID.randomUUID().toString(),
+            "",
+            Urgency.Normal,
+            false,
+            creationDate = LocalDate.fromEpochDays(0)
+        )
+    )
 
     val todo: StateFlow<TodoItem>
         get() = _todo.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            if (id != null)
+                _todo.update { getTodoItemByIdUseCase(id) }
+        }
+    }
 
     val isNew: Boolean
         get() = id == null
 
     fun saveTodo() = viewModelScope.launch {
-        if (id != null) {
-            updateTodoItemUseCase(_todo.value)
-        } else {
-            addTodoItemUseCase(_todo.value)
+        runCatching {
+            if (id != null) {
+                updateTodoItemUseCase(_todo.value)
+            } else {
+                addTodoItemUseCase(_todo.value)
+            }
         }
     }
 
