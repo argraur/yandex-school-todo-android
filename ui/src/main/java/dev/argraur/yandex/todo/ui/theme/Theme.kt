@@ -8,6 +8,8 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -49,9 +51,32 @@ fun TodoTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val customColorsPalette = when {
+        darkTheme -> CustomColorsPalette(
+            redAccent = RedAccentDark,
+            greenAccent = GreenAccentDark,
+            blueAccent = BlueAccentDark,
+            grayAccent = GrayAccentDark,
+            grayLightAccent = LightGrayAccentDark,
+            whiteAccent = Color.White
+        )
+        else -> CustomColorsPalette(
+            redAccent = RedAccentLight,
+            greenAccent = GreenAccentLight,
+            blueAccent = BlueAccentLight,
+            grayAccent = GrayAccentLight,
+            grayLightAccent = LightGrayAccentLight,
+            whiteAccent = Color.White
+        )
+    }
+
+    CompositionLocalProvider(
+        LocalCustomColorsPalette provides customColorsPalette
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }

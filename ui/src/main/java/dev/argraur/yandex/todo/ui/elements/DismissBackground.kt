@@ -21,15 +21,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.argraur.yandex.todo.ui.R
-import dev.argraur.yandex.todo.ui.theme.Green
-import dev.argraur.yandex.todo.ui.theme.Red
+import dev.argraur.yandex.todo.ui.theme.LocalCustomColorsPalette
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun DismissBackground(dismissBoxState: SwipeToDismissBoxState) {
     val color = when (dismissBoxState.dismissDirection) {
-        SwipeToDismissBoxValue.StartToEnd -> Red
-        SwipeToDismissBoxValue.EndToStart -> Green
+        SwipeToDismissBoxValue.StartToEnd -> LocalCustomColorsPalette.current.redAccent
+        SwipeToDismissBoxValue.EndToStart -> LocalCustomColorsPalette.current.greenAccent
         SwipeToDismissBoxValue.Settled -> Color.Transparent
     }
     Row(

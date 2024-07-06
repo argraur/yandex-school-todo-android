@@ -5,7 +5,6 @@
 
     <string name="date_picker_confirm">OK</string>
     <string name="date_picker_dismiss">Cancel</string>
-    <string name="date_pattern">dd MMMM yyyy</string>
 
     <string name="edit_todo_delete">Delete</string>
     <string name="edit_todo_deadline">Deadline</string>
@@ -28,4 +27,8 @@
     <string name="content_description_ic_visibility">Done todos are visible</string>
     <string name="content_description_ic_visibility_off">Done todos are invisible</string>
     <string name="content_description_add_todo">Add todo</string>
+    <string name="main_error_toast">"Error occurred: "</string>
+    <string name="main_loading_error">Error occurred during data loading</string>
+    <string name="main_loading_retry">Try again</string>
+    <string name="content_description_main_retry">Try again button</string>
 </resources>
