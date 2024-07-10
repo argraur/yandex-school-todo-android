@@ -3,8 +3,8 @@ package dev.argraur.yandex.todo.domain.usecases
 import dev.argraur.yandex.todo.domain.repository.TodoItemsRepository
 import javax.inject.Inject
 
-class GetTodoItemByIdUseCase @Inject constructor(
+class RefreshRepositoryUseCase @Inject constructor(
     private val repository: TodoItemsRepository
 ) {
-    suspend operator fun invoke(id: String) = repository.getTodoById(id)
+    suspend operator fun invoke() = repository.refreshRepository()
 }

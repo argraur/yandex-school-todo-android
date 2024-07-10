@@ -1,48 +1,46 @@
 package dev.argraur.yandex.todo.data.repository
 
-import dev.argraur.yandex.todo.data.source.MockTodoItemsDataSource
+import dev.argraur.yandex.todo.data.database.TodoLocalDataSource
+import dev.argraur.yandex.todo.data.network.TodoRemoteDataSource
 import dev.argraur.yandex.todo.domain.model.TodoItem
 import dev.argraur.yandex.todo.domain.repository.TodoItemsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TodoItemsRepositoryImpl @Inject constructor(
-    private val dataSource: MockTodoItemsDataSource
+    private val localDataSource: TodoLocalDataSource,
+    private val remoteDataSource: TodoRemoteDataSource
 ) : TodoItemsRepository {
-    private val _todoItemsFlow = MutableStateFlow<List<TodoItem>>(emptyList())
-    private val coroutineContext = Dispatchers.Default
+    private val ioContext = Dispatchers.IO + Job()
 
-    init {
-        _todoItemsFlow.value = dataSource.getTodoItems()
+    override suspend fun refreshRepository() = withContext(ioContext) {
+        val list = remoteDataSource.getTodoList()
+        localDataSource.insertTodoItems(list)
     }
 
-    override fun getTodoItems(): StateFlow<List<TodoItem>> =
-        _todoItemsFlow.asStateFlow()
+    override fun getTodoItems(): Flow<List<TodoItem>> =
+        localDataSource.getTodoItems()
 
-    override fun getTodoById(id: String): TodoItem =
-        _todoItemsFlow.value.first { it.id == id }
-
-    override suspend fun addTodoItem(item: TodoItem): Boolean = withContext(coroutineContext) {
-        _todoItemsFlow.value += item
-        return@withContext dataSource.addTodoItem(item)
+    override suspend fun getTodoById(id: String): TodoItem = withContext(ioContext) {
+        localDataSource.getTodoItemById(id)
     }
 
-    override suspend fun updateTodoItem(item: TodoItem): Boolean = withContext(coroutineContext) {
-        _todoItemsFlow.update { items ->
-            items.map { if (it.id == item.id) item else it }
-        }
-        return@withContext dataSource.updateTodoItem(item)
+    override suspend fun addTodoItem(item: TodoItem) = withContext(ioContext) {
+        localDataSource.insertTodoItem(item)
+        remoteDataSource.addTodoItem(item)
     }
 
-    override suspend fun removeTodoItem(id: String): Boolean = withContext(coroutineContext) {
-        _todoItemsFlow.update { items ->
-            items.filterNot { it.id == id }
-        }
-        return@withContext dataSource.removeTodoItem(id)
+    override suspend fun updateTodoItem(item: TodoItem) = withContext(ioContext) {
+        localDataSource.insertTodoItem(item)
+        remoteDataSource.updateTodoItem(item)
+    }
+
+    override suspend fun removeTodoItem(id: String) = withContext(ioContext) {
+        localDataSource.deleteTodoItemById(id)
+        remoteDataSource.deleteTodoItemById(id)
     }
 }

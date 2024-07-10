@@ -15,3 +15,7 @@ fun LocalDate.localizedFormat(): String {
 fun LocalDate.Companion.fromEpochMillis(epochMillis: Long): LocalDate {
     return fromEpochDays((epochMillis / millisToDaysRatio).toInt())
 }
+
+fun LocalDate.toEpochMillis(): Long {
+    return toEpochDays() * millisToDaysRatio.toLong()
+}

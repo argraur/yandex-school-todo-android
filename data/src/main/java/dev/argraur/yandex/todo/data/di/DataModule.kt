@@ -1,11 +1,15 @@
 package dev.argraur.yandex.todo.data.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.argraur.yandex.todo.data.database.TodoLocalDataSource
+import dev.argraur.yandex.todo.data.metadata.MetadataStorage
+import dev.argraur.yandex.todo.data.network.TodoRemoteDataSource
 import dev.argraur.yandex.todo.data.repository.TodoItemsRepositoryImpl
-import dev.argraur.yandex.todo.data.source.MockTodoItemsDataSource
 import dev.argraur.yandex.todo.domain.repository.TodoItemsRepository
 import javax.inject.Singleton
 
@@ -14,11 +18,13 @@ import javax.inject.Singleton
 object DataModule {
     @Singleton
     @Provides
-    fun provideMockTodoItemsDataSource() = MockTodoItemsDataSource()
+    fun provideTodoItemsRepository(
+        localDataSource: TodoLocalDataSource,
+        remoteDataSource: TodoRemoteDataSource
+    ): TodoItemsRepository = TodoItemsRepositoryImpl(localDataSource, remoteDataSource)
 
     @Singleton
     @Provides
-    fun provideTodoItemsRepository(
-        mockTodoItemsDataSource: MockTodoItemsDataSource
-    ): TodoItemsRepository = TodoItemsRepositoryImpl(mockTodoItemsDataSource)
+    fun provideMetadataStorage(@ApplicationContext applicationContext: Context) =
+        MetadataStorage(applicationContext)
 }

@@ -32,4 +32,8 @@
     <string name="main_loading_error">Произошла ошибка во время загрузки данных</string>
     <string name="main_loading_retry">Повторить попытку</string>
     <string name="content_description_main_retry">Кнопка повторить попытку</string>
+    <string name="error_server_sync">Не удалось синхронизироваться с сервером</string>
+    <string name="error_task_update">Не удалось обновить задачу на сервере</string>
+    <string name="error_task_remove">Не удалось удалить задачу на сервере</string>
+    <string name="error_snackbar_action_label">Повторить</string>
 </resources>
