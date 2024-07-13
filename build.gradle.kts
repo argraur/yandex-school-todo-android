@@ -9,6 +9,5 @@ plugins {
     alias(libs.plugins.ktorfit) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.kotlin.plugin.serialization) apply false
-    alias(libs.plugins.secrets.gradle.plugin) apply false
     alias(libs.plugins.detekt)
 }

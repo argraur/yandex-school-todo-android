@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.ktorfit
 import dev.argraur.yandex.todo.data.BuildConfig
 import dev.argraur.yandex.todo.data.metadata.MetadataStorage

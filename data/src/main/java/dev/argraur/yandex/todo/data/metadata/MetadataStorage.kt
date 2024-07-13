@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-const val TOKEN = BuildConfig.token
+val TOKEN: String = BuildConfig.SERVER_TOKEN
 const val DATASTORE_NAME = "metadata"
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
