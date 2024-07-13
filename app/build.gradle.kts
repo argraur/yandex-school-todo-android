@@ -10,6 +10,17 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.create("release").apply {
+                keyAlias = "releasekey"
+                keyPassword = providers.environmentVariable("RELEASEKEY_PASSWORD").getOrElse("")
+                storeFile = File("$rootDir/keystore.jks")
+                storePassword = providers.environmentVariable("KEYSTORE_PASSWORD").getOrElse("")
+            }
+        }
+    }
 }
 
 telegramReports {

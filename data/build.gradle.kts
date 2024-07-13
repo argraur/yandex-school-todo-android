@@ -18,7 +18,7 @@ android {
     buildTypes {
         all {
             buildConfigField("String", "SERVER_BASE_URL", property("serverBaseUrl").toString())
-            buildConfigField("String", "SERVER_TOKEN", "\"${providers.environmentVariable("SERVER_TOKEN").get()}\"")
+            buildConfigField("String", "SERVER_TOKEN", "\"${providers.environmentVariable("SERVER_TOKEN").getOrElse("")}\"")
         }
     }
 }
