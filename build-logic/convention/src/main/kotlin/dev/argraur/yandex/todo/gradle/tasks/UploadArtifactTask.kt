@@ -23,9 +23,9 @@ import java.time.LocalDateTime
 
 internal fun Project.configureUploadArtifactTask(
     extension: AndroidComponentsExtension<*, *, *>,
-    versionCode: Int?,
-    tokenProperty: Property<String>,
-    chatIdProperty: Property<String>
+    versionCode: Lazy<Int>,
+    token: Property<String>,
+    chatId: Property<String>
 ) {
     extension.onVariants { variant ->
         val loader = variant.artifacts.getBuiltArtifactsLoader()
@@ -34,9 +34,9 @@ internal fun Project.configureUploadArtifactTask(
             apkFolder = artifact
             builtArtifactsLoader = loader
             variantName = variant.name
-            apkSendName = "${APK_NAME_PREFIX}-${variant.name}-${versionCode}"
-            token = tokenProperty
-            chatId = chatIdProperty
+            this.versionCode = versionCode
+            this.token = token
+            this.chatId = chatId
         }.dependsOn("verify${variant.name.uppercaseFirstChar()}ArtifactSize")
     }
 }
@@ -53,7 +53,7 @@ internal abstract class UploadArtifactTask : DefaultTask() {
     abstract val variantName: Property<String>
 
     @get:Input
-    abstract val apkSendName: Property<String>
+    abstract var versionCode: Lazy<Int>
 
     @get:Input
     abstract val token: Property<String>
@@ -65,6 +65,8 @@ internal abstract class UploadArtifactTask : DefaultTask() {
     fun execute() {
         val telegramApi = TelegramApi(token.get(), chatId.get())
 
+        val apkSendName = "${APK_NAME_PREFIX}-${variantName.get()}-${versionCode.value}.apk"
+
         val builtArtifacts = builtArtifactsLoader.get().load(apkFolder.get())
             ?: throw RuntimeException("Cannot load APKs")
         if (builtArtifacts.elements.size != 1)
@@ -72,6 +74,6 @@ internal abstract class UploadArtifactTask : DefaultTask() {
 
         val apk = File(builtArtifacts.elements.single().outputFile)
         println("Uploading ${variantName.get()} artifact to Telegram channel ${chatId.get()}...")
-        telegramApi.sendFile(apk, apkSendName.get() + ".apk", "*Build timestamp* `${LocalDateTime.now()}`\n*File size* `${apk.length() / 1024} KB`")
+        telegramApi.sendFile(apk, apkSendName, "*Build timestamp* `${LocalDateTime.now()}`\n*File size* `${apk.length() / 1024} KB`")
     }
 }

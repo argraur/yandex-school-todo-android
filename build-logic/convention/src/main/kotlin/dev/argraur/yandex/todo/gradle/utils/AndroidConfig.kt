@@ -7,8 +7,6 @@ fun BaseExtension.baseAndroidConfig() {
     compileSdkVersion(COMPILE_SDK)
 
     defaultConfig {
-        versionCode = VERSION_CODE
-        versionName = VERSION_NAME
         minSdk = MIN_SDK
 
         vectorDrawables {
