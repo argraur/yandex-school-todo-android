@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.todo.room)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.plugin.serialization)
-    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 room {
