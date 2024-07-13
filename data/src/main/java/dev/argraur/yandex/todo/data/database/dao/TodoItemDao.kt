@@ -1,12 +1,10 @@
 package dev.argraur.yandex.todo.data.database.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.argraur.yandex.todo.data.database.entity.TodoItemEntity
-import dev.argraur.yandex.todo.domain.model.TodoItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
